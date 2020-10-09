@@ -3,7 +3,6 @@
 
 #include <atomic>
 #include <cstdio>
-
 #include <iostream>
 
 #include "HazardPointer/reclaimer.h"
@@ -38,9 +37,11 @@ class LockFreeLinkedList {
     }
   }
 
-  // Find the first node which data is greater than the given data,
-  // then insert the new node before it then return true, else if
-  // data is already exist in list then return false.
+  /**
+   * Find the first node which data is greater than the given data,
+   * then insert the new node before it then return true, else if
+   * data is already exist in list then return false.
+   */
   template <typename... Args>
   bool Emplace(Args&&... args);
 
