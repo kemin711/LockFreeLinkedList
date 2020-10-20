@@ -1,19 +1,6 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -pedantic -std=c++17 -g -o3
-#-fsanitize=address -fsanitize=leak
-#-fsanitize=thread
-SRC = test.cc
-EXEC = test
+lib_LTLIBRARIES = liblkfsortedlist.la
+pkginclude_HEADERS = lockfree_linkedlist.h reclaimer.h 
+liblkfsortedlist_la_SOURCES = $(pkginclude_HEADERS) reclaimer.cpp
+liblkfsortedlist_la_LDFLAGS = -version-info 0:0:0
+liblkfsortedlist_la_LIBADD = -lpthread
 
-all: $(EXEC)
-
-$(EXEC): test.cc lockfree_linkedlist.h HazardPointer/reclaimer.h
-	$(CXX) $(CXXFLAGS) -o $(EXEC) test.cc -lpthread
-
-HazardPointer/reclaimer.h:
-	git submodule update --remote --recursive --init
-
-.Phony : clean
-
-clean:
-	rm -rf $(EXEC)
